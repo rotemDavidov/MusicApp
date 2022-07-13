@@ -1,16 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
-
-    <TextView
-        android:layout_width="wrap_content"
+    tools:context=".ProfileFragment"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@drawable/background">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Profile Fragment"
-        android:textSize="25dp"
-        android:layout_centerInParent="true"/>
+        android:orientation="vertical"
+        android:layout_marginTop="-20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bring music to"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="normal"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="50dp">
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="People"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:layout_marginStart="15dp"></TextView>
+    </LinearLayout>
+    <include
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        layout="@layout/item_image"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_height="wrap_content" />
 
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-15dp"
+            android:orientation="vertical">
+            <include layout="@layout/name_frame"/>
+
+            <include layout="@layout/phone_frame"/>
+
+            <include layout="@layout/delete_music"/>
+
+        </LinearLayout>
+
+
+
+
+
+</LinearLayout>
