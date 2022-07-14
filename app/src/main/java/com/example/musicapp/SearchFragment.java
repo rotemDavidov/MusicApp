@@ -15,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
@@ -43,6 +44,18 @@ public class SearchFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        Button allSongsBtn = (Button) getView().findViewById(R.id.all_songs_btn);
+        Button searchSongsBtn = (Button) getView().findViewById(R.id.search_songs_btn);
+        allSongsBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                filterSongs(v);
+            }
+        });
+        searchSongsBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                filterSongs(v);
+            }
+        });
         rvSongs = view.findViewById(R.id.searchRv);
         SearchView searchView = (SearchView) getView().findViewById(R.id.searchView);
         searchView.setQueryHint("Enter song name");
@@ -97,4 +110,38 @@ public class SearchFragment extends Fragment {
 
         //}
     }
+
+    public void filterSongs(View v) {
+        Button button = (Button)v;
+        SearchView searchView = (SearchView) getView().findViewById(R.id.searchView);
+        searchView.setQuery("", false);
+        searchView.clearFocus();
+        searchView.setQueryHint("Enter song name");
+        if(((Button) v).getText().toString().equals("All")){
+            enableSearchView(getView().findViewById(R.id.searchView),false);
+            adapter.shownSongs = allSongsList;
+            rvSongs.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+        else
+        {
+            enableSearchView(getView().findViewById(R.id.searchView),true);
+            adapter.shownSongs = new ArrayList<Song>();
+            rvSongs.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    private void enableSearchView(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) view;
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                View child = viewGroup.getChildAt(i);
+                enableSearchView(child, enabled);
+            }
+        }
+    }
+
+
 }
