@@ -1,26 +1,42 @@
 package com.example.musicapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import com.example.musicapp.R;
+import android.content.SharedPreferences;
+
 
 public class ProfileFragment extends Fragment {
 
+    public static final String SHARED_PREFS="sharedPre";
+    public static final String TEXT_NAME ="text_name";
+    public static final String TEXT_PHONE ="text_phone";
+    public static final String ANS_SWITCH="switch";
+
     private ImageView add_name_btn=null;
     private ImageView add_phone_btn = null;
+    private Switch sw = null;
     private MainViewModel myViewModel;
-    private View view_;
+
+    public static View view_ = null;
     private String dialog_name;
+    private String text_name;
+    private String text_phone;
+    private boolean ansSwitch;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,6 +49,7 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.view_ = view;
 
+        // ------------------- SET LISTENERS -------------------------------------
         add_name_btn = (ImageView) view.findViewById(R.id.add_name);
         add_name_btn.setOnClickListener(new OnClickListener(){
             public void onClick(View view) {
@@ -48,7 +65,15 @@ public class ProfileFragment extends Fragment {
                 DialogClass dialog = new DialogClass("phone");
                 dialog.show(getChildFragmentManager(), "dialog_name");
             }});
-        //adding observer
+
+        sw = (Switch)view_.findViewById(R.id.switch1);
+        sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                saveDataSwitch(isChecked);
+            }
+        });
+
+        //--------------------- SETTING OBSERVER --------------------------------------
 
         Observer<String> observeNameChange = new Observer<String>() {
             @Override
@@ -57,6 +82,8 @@ public class ProfileFragment extends Fragment {
                     ((TextView)view_.findViewById(R.id.name)).setText(t);
                 else
                     ((TextView)view_.findViewById(R.id.phone_frame)).setText(t);
+                //any change we save in the sp file for the loading of tha app
+                saveDataStrings();
             }
         };
         MutableLiveData<String> nameL = myViewModel.getInputLiveData();
@@ -67,6 +94,37 @@ public class ProfileFragment extends Fragment {
             System.out.println(e.toString());
         }
 
+        //------------------------ LOAD SAVE DATA ------------------------------------
+        loadData();
+        updateData();
+
         }
+
+    private void saveDataStrings() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, getActivity().MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(TEXT_NAME, ((TextView)view_.findViewById(R.id.name)).getText().toString());
+        editor.putString(TEXT_PHONE, ((TextView)view_.findViewById(R.id.phone_frame)).getText().toString());
+        editor.apply();
+    }
+    private void saveDataSwitch(boolean ans){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, getActivity().MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(ANS_SWITCH, ans);
+        editor.apply();
+
+    }
+
+    private void loadData(){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, getActivity().MODE_PRIVATE);
+        text_name = sharedPreferences.getString(TEXT_NAME,"Israel Israeli");
+        text_phone = sharedPreferences.getString(TEXT_PHONE,"05X-XXXXXXX");
+        ansSwitch = sharedPreferences.getBoolean(ANS_SWITCH,false);
+    }
+    private void updateData(){
+        ((TextView)view_.findViewById(R.id.name)).setText(text_name);
+        ((TextView)view_.findViewById(R.id.phone_frame)).setText(text_phone);
+        ((Switch)view_.findViewById(R.id.switch1)).setChecked(ansSwitch);
+    }
 
 }

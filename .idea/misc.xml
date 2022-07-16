@@ -3,22 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/ic__person.xml" value="0.2485" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/ic__phone.xml" value="0.2485" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/ic_add.xml" value="0.1395" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/ic_restore_delete.xml" value="0.162" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/profile.xml" value="0.159" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/activity_main.xml" value="0.234375" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/delete_favorite.xml" value="0.25" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/delete_music.xml" value="0.25" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/dialog_name.xml" value="0.22864583333333333" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/fragment_favorites.xml" value="0.25" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/fragment_search.xml" value="0.25" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/item_image.xml" value="0.25" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/name_frame.xml" value="0.25" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/phone_frame.xml" value="0.25" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/profile_frame.xml" value="0.25" />
+        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/activity_main.xml" value="0.2078125" />
+        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/delete_favorite.xml" value="0.1" />
+        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/delete_music.xml" value="0.234375" />
+        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/dialog_name.xml" value="0.1" />
+        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/fragment_favorites.xml" value="0.20471014492753623" />
+        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/fragment_profile.xml" value="0.14492753623188406" />
+        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/name_frame.xml" value="0.1" />
+        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/phone_frame.xml" value="0.1" />
+        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/xml/setting_prefernce.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/matti/AndroidStudioProjects/MusicApp/app/src/main/res/layout/activity_main.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/matti/AndroidStudioProjects/MusicApp/app/src/main/res/layout/fragment_favorites.xml" value="0.1796875" />
         <entry key="..\:/Users/matti/AndroidStudioProjects/MusicApp/app/src/main/res/layout/fragment_profile.xml" value="0.1796875" />
@@ -28,7 +21,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

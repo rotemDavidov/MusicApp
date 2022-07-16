@@ -48,4 +48,5 @@ public class DialogClass extends DialogFragment {
                 );
         return builder.create();
     }
+
 }

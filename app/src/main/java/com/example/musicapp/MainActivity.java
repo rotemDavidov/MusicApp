@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     FavoritesFragment favoritesFragment = new FavoritesFragment();
     SearchFragment searchFragment = new SearchFragment();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
