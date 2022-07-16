@@ -13,10 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -104,7 +107,7 @@ public class SearchFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         //if(shownSongsNames == null) {
             //shownSongsList = new ArrayList<Song>();
-            adapter = new SearchAdapter(getActivity(),this.listener, this.shownSongsList);
+            adapter = new SearchAdapter(getActivity(),this.listener, this.allSongsList);
             rvSongs.setAdapter(adapter);
             rvSongs.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -117,7 +120,7 @@ public class SearchFragment extends Fragment {
         searchView.setQuery("", false);
         searchView.clearFocus();
         searchView.setQueryHint("Enter song name");
-        if(((Button) v).getText().toString().equals("All")){
+        if(button.getText().toString().equals("All")){
             enableSearchView(getView().findViewById(R.id.searchView),false);
             adapter.shownSongs = allSongsList;
             rvSongs.setAdapter(adapter);

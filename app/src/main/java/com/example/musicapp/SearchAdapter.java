@@ -2,6 +2,8 @@ package com.example.musicapp;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     ArrayList<Song> shownSongs;
     Context context;
     SearchAdapterListener listener;
+    SongPlayerFragment songPlayerFragment;
     MediaPlayer mp;
 
     public SearchAdapter(Context context, SearchAdapterListener listener, ArrayList<Song> shownSongs) {
@@ -25,6 +29,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         this.listener = listener;
         this.allSongs = SongsCSVParser.parseSongs(context);
         this.shownSongs = shownSongs;
+        this.songPlayerFragment = new SongPlayerFragment();
     }
 
     @NonNull
@@ -93,11 +98,20 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     public void onItemClick(int position) {
         Song song = this.shownSongs.get(position);
-        if(mp != null)
+/*        if(mp != null)
             mp.stop();
         mp = MediaPlayer.create(this.context,
                 this.context.getResources().getIdentifier(song.track, "raw", this.context.getPackageName()));
-        mp.start();
+        mp.start();*/
+        Bundle b = new Bundle();
+        //b.putInt("SongPosition", position);
+        b.putSerializable("song", song);
+        //b.putParcelable("SongsList", (Parcelable) shownSongs);
+        songPlayerFragment.setArguments(b);
+        ((FragmentActivity)context).getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, songPlayerFragment)
+                .addToBackStack("SongPlayerFragment")
+                .commit();
     }
 
     public interface SearchAdapterListener {
