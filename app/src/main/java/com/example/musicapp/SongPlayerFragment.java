@@ -47,8 +47,8 @@ public class SongPlayerFragment extends Fragment {
         TextView songName = (TextView) view.findViewById(R.id.player_song_name);
         TextView artistName = (TextView) view.findViewById(R.id.player_artist_name);
         ImageView albumArt = (ImageView) view.findViewById(R.id.player_image);
-        BottomNavigationView bottomNavMenu = (BottomNavigationView) view.findViewById(R.id.bottom_navigation);
-        bottomNavMenu.setVisibility(View.GONE);
+//        BottomNavigationView bottomNavMenu = (BottomNavigationView) view.findViewById(R.id.bottom_navigation);
+//        bottomNavMenu.setVisibility(View.GONE);
         songName.setText(songPlaying.name);
         artistName.setText(songPlaying.artist);
         if(mp != null)
