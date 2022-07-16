@@ -36,7 +36,7 @@ public class DialogClass extends DialogFragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 String name = ((EditText)Viewdialog.findViewById(R.id.input)).getText().toString();
                                 //there is a instance because the profile create one of this
-                                MainViewModel.getInstance(getActivity().getApplication(), getContext(), getActivity()).setInputLiveData(name);
+                                MainViewModel.getInstance(getActivity().getApplication()).setInputLiveData(name);
                             }
                         })
                 .setNegativeButton("Cancel",

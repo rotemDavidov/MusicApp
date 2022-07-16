@@ -1,5 +1,6 @@
 package com.example.musicapp;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -41,7 +42,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        myViewModel = MainViewModel.getInstance(getActivity().getApplication(), getActivity().getApplication(), getActivity());
+        myViewModel = MainViewModel.getInstance(getActivity().getApplication());
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
@@ -70,6 +71,8 @@ public class ProfileFragment extends Fragment {
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 saveDataSwitch(isChecked);
+                if(!isChecked)
+                    clearSp();
             }
         });
 
@@ -125,6 +128,14 @@ public class ProfileFragment extends Fragment {
         ((TextView)view_.findViewById(R.id.name)).setText(text_name);
         ((TextView)view_.findViewById(R.id.phone_frame)).setText(text_phone);
         ((Switch)view_.findViewById(R.id.switch1)).setChecked(ansSwitch);
+    }
+
+    //if the switch is off then we need to clear the sp that hold the ignore lists from the last time
+    private void clearSp(){
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("ignoredList", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.remove("ignore");
+        editor.apply();
     }
 
 }

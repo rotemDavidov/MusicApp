@@ -1,5 +1,6 @@
 package com.example.musicapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.view.LayoutInflater;
@@ -16,21 +17,21 @@ import java.util.ArrayList;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>{
     ArrayList<Song> allSongs;
     ArrayList<Song> shownSongs;
-    Context context;
+    Activity activity;
     SearchAdapterListener listener;
     MediaPlayer mp;
 
-    public SearchAdapter(Context context, SearchAdapterListener listener, ArrayList<Song> shownSongs) {
-        this.context = context;
+    public SearchAdapter(Activity activity, SearchAdapterListener listener, ArrayList<Song> shownSongs) {
+        this.activity = activity;
         this.listener = listener;
-        this.allSongs = SongsCSVParser.parseSongs(context);
+        this.allSongs = MainViewModel.getInstance(activity.getApplication()).getAllSongs().getValue();
         this.shownSongs = shownSongs;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.row_item,parent,false);
         ViewHolder viewHolder = new ViewHolder(itemView);
         return viewHolder;
@@ -67,14 +68,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             songName.setText(shownSongs.get(position).name);
             artistName.setText(shownSongs.get(position).artist);
             albumName.setText(shownSongs.get(position).album);
-            albumArt.setImageResource(context.getResources().getIdentifier(
-                    shownSongs.get(position).art,"drawable", context.getPackageName()
+            albumArt.setImageResource(activity.getResources().getIdentifier(
+                    shownSongs.get(position).art,"drawable", activity.getPackageName()
             ));
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     onItemLongClick(position);
-                    return false;
+                    return true;
                 }
             });
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -86,17 +87,23 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         }
     }
     public void onItemLongClick(int position) {
-        Song song = this.shownSongs.get(position);
-        //TODO: add code for saving to favorites
-        notifyDataSetChanged();
+        MainViewModel mv = MainViewModel.getInstance(activity.getApplication());
+        // getting the name of the songs that been removed
+        String s = mv.getAllSongs().getValue().get(position).name;
+        // writing the songs to the ignored file
+        mv.writeToFile(s);
+        // removing the song from the list of all songs
+        mv.getAllSongs().getValue().remove(position);
+        // notify that the live data has been changed
+        notifyItemRemoved(position);
     }
 
     public void onItemClick(int position) {
         Song song = this.shownSongs.get(position);
         if(mp != null)
             mp.stop();
-        mp = MediaPlayer.create(this.context,
-                this.context.getResources().getIdentifier(song.track, "raw", this.context.getPackageName()));
+        mp = MediaPlayer.create(this.activity,
+                this.activity.getResources().getIdentifier(song.track, "raw", this.activity.getPackageName()));
         mp.start();
     }
 
