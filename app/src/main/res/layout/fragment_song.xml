@@ -41,7 +41,7 @@
 
         <TextView
             android:id="@+id/time_counter_up"
-            android:layout_width="45dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="00:00" />
@@ -58,16 +58,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="00:00" />
+
     </LinearLayout>
 
-    <Button
+    <ImageButton
         android:id="@+id/player_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:layout_below="@+id/linear_seek"
-        android:text="Button" />
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/pause_btn" />
 
     <SeekBar
         android:id="@+id/player_volume"

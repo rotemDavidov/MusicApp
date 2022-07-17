@@ -94,6 +94,16 @@ public class SearchFragment extends Fragment {
         super.onDetach();
         //listener = null;
     }
+
+    @Override
+    public void onResume() {
+        enableSearchView(getView().findViewById(R.id.searchView),false);
+        adapter.shownSongs = allSongsList;
+        rvSongs.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        super.onResume();
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
