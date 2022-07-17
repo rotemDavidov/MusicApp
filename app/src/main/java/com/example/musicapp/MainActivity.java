@@ -1,10 +1,16 @@
 package com.example.musicapp;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -44,5 +50,31 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        permission(Manifest.permission.READ_SMS);
+        permission(Manifest.permission.RECEIVE_SMS);
     }
+
+    private void permission(String permission) {
+        if (ContextCompat.checkSelfPermission(
+                this, permission) == PackageManager.PERMISSION_GRANTED) {
+            return;
+        } else if (shouldShowRequestPermissionRationale(permission)) {
+            Toast.makeText(this, "You need to grant permission to sms.", Toast.LENGTH_LONG).show();
+        }
+        //ask for permission from the user , launch the dialog
+        requestPermissionLauncher.launch(permission);
+    }
+
+    // Register the permissions callback, which handles the user's response to the
+    // system permissions dialog.
+    private ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    Toast.makeText(this, "Permission Granted!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+
+                }
+            });
 }

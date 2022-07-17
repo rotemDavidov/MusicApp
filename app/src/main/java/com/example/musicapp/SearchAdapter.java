@@ -115,7 +115,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         b.putSerializable("song", song);
         //b.putParcelable("SongsList", (Parcelable) shownSongs);
         songPlayerFragment.setArguments(b);
-        ((FragmentActivity)context).getSupportFragmentManager().beginTransaction()
+        ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, songPlayerFragment)
                 .addToBackStack("SongPlayerFragment")
                 .commit();
