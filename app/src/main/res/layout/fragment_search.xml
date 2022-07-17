@@ -18,11 +18,33 @@
 
     </androidx.appcompat.widget.SearchView>
 
+    <LinearLayout
+        android:id="@+id/song_filter"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/searchView"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/all_songs_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="All" />
+
+        <Button
+            android:id="@+id/search_songs_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Search" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/searchRv"
-        android:layout_below="@+id/searchView"
+        android:layout_below="@+id/song_filter"
         android:layout_marginBottom="56dp"
         android:layout_marginTop="0dp"/>
 
