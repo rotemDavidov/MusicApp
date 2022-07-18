@@ -1,5 +1,7 @@
 package com.example.musicapp;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +35,11 @@ public class SongPlayerFragment extends Fragment {
     int position;
     MediaPlayer mp;
     SeekBar songSeek;
+    TextView elapsedTime;
+    TextView remainingTime;
+    int songDuration;
+    private SeekBar volumeSeekbar = null;
+    private AudioManager audioManager = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +56,9 @@ public class SongPlayerFragment extends Fragment {
         TextView songName = (TextView) view.findViewById(R.id.player_song_name);
         TextView artistName = (TextView) view.findViewById(R.id.player_artist_name);
         ImageView albumArt = (ImageView) view.findViewById(R.id.player_image);
+        initControls();
+        elapsedTime = (TextView) view.findViewById(R.id.time_counter_up);
+        remainingTime = (TextView) view.findViewById(R.id.time_counter_down);
         songSeek = (SeekBar) view.findViewById(R.id.player_song_position);
         ImageButton playPauseBtn = (ImageButton) view.findViewById(R.id.player_button);
         playPauseBtn.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +125,7 @@ public class SongPlayerFragment extends Fragment {
                         if(mp.isPlaying()){
                             Message msg = new Message();
                             msg.what = mp.getCurrentPosition();
-                            handler.sendMessage(msg);
+                            progressHandler.sendMessage(msg);
                             Thread.sleep(10);
                         }
                     }catch (InterruptedException e){
@@ -125,16 +135,70 @@ public class SongPlayerFragment extends Fragment {
             }
         }).start();
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                songDuration = mp.getDuration();
+                int seconds = 0;
+                int minutes = 0;
+                String stringToSend = new String();
+                while(mp != null) {
+                    try{
+                        if(mp.isPlaying()){
+                            Message msgElapsed = new Message();
+                            Message msgRemaining = new Message();
+                            msgElapsed.obj = getTimeString(mp.getCurrentPosition());
+                            elapsedTimeHandler.sendMessage(msgElapsed);
+                            msgRemaining.obj = getTimeString(mp.getDuration() - mp.getCurrentPosition());
+                            remainingTimeHandler.sendMessage(msgRemaining);
+                            Thread.sleep(1000);
+                        }
+                    }catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
 
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private Handler handler = new Handler() {
+    private Handler progressHandler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
             songSeek.setProgress(msg.what);
         }
     };
+
+    private Handler elapsedTimeHandler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            String time = (String)msg.obj;
+            elapsedTime.setText(time);
+        }
+    };
+
+    private Handler remainingTimeHandler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            String time = (String)msg.obj;
+            remainingTime.setText(time);
+        }
+    };
+
+    private String getTimeString(long millis) {
+        StringBuffer buf = new StringBuffer();
+
+        long minutes = ( millis % (1000*60*60) ) / (1000*60);
+        long seconds = ( ( millis % (1000*60*60) ) % (1000*60) ) / 1000;
+
+        buf
+                .append(String.format("%02d", minutes))
+                .append(":")
+                .append(String.format("%02d", seconds));
+
+        return buf.toString();
+    }
 
     @Override
     public void onDestroy() {
@@ -146,5 +210,43 @@ public class SongPlayerFragment extends Fragment {
     public void onPause() {
         mp.stop();
         super.onPause();
+    }
+
+    private void initControls()
+    {
+        try
+        {
+            volumeSeekbar = (SeekBar) getView().findViewById(R.id.player_volume);
+            audioManager = (AudioManager) getView().getContext().getSystemService(Context.AUDIO_SERVICE);
+            volumeSeekbar.setMax(audioManager
+                    .getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+            volumeSeekbar.setProgress(audioManager
+                    .getStreamVolume(AudioManager.STREAM_MUSIC));
+
+
+            volumeSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+            {
+                @Override
+                public void onStopTrackingTouch(SeekBar arg0)
+                {
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar arg0)
+                {
+                }
+
+                @Override
+                public void onProgressChanged(SeekBar arg0, int progress, boolean arg2)
+                {
+                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
+                            progress, 0);
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
