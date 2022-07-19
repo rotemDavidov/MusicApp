@@ -41,11 +41,11 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/searchRv"
         android:layout_below="@+id/song_filter"
-        android:layout_marginBottom="56dp"
-        android:layout_marginTop="0dp"/>
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="56dp" />
 
 </RelativeLayout>
