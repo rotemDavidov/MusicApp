@@ -7,8 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.service.notification.NotificationListenerService;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -64,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
         }
         //ask for permission from the user , launch the dialog
         requestPermissionLauncher.launch(permission);
+    }
+
+    @Override
+    protected void onStop () {
+        startService(new Intent(this, NotificationService.class));
+        super.onStop();
     }
 
     // Register the permissions callback, which handles the user's response to the
