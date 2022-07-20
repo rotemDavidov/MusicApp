@@ -8,6 +8,7 @@ public class Song implements Serializable {
     String album;
     String track;
     String art;
+    public boolean fave ;
 
     public Song(String artist, String name, String album, String track, String art) {
         this.artist = artist;
@@ -15,6 +16,7 @@ public class Song implements Serializable {
         this.album = album;
         this.track = track;
         this.art = art;
+        fave = false;
     }
 
     public String getName() {

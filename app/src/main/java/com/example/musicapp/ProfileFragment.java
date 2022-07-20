@@ -26,6 +26,7 @@ public class ProfileFragment extends Fragment {
     public static final String TEXT_NAME ="text_name";
     public static final String TEXT_PHONE ="text_phone";
     public static final String ANS_SWITCH="switch";
+    private static String dialog_name;
 
     private ImageView add_name_btn=null;
     private ImageView add_phone_btn = null;
@@ -33,7 +34,6 @@ public class ProfileFragment extends Fragment {
     private MainViewModel myViewModel;
 
     public static View view_ = null;
-    private String dialog_name;
     private String text_name;
     private String text_phone;
     private boolean ansSwitch;
@@ -81,26 +81,29 @@ public class ProfileFragment extends Fragment {
         Observer<String> observeNameChange = new Observer<String>() {
             @Override
             public void onChanged(String t) {
-                if(dialog_name.equals("name"))
-                    ((TextView)view_.findViewById(R.id.name)).setText(t);
-                else
-                    ((TextView)view_.findViewById(R.id.phone_frame)).setText(t);
-                //any change we save in the sp file for the loading of tha app
+                dialog_name="name";
+                ((TextView)view_.findViewById(R.id.name)).setText(t);
                 saveDataStrings();
             }
         };
-        MutableLiveData<String> nameL = myViewModel.getInputLiveData();
-        try {
-            nameL.observe((LifecycleOwner) getContext(), observeNameChange);
-        }
-        catch (Exception e){
-            System.out.println(e.toString());
-        }
+        MutableLiveData<String> nameL = myViewModel.getNameLiveData();
+        nameL.observe(getViewLifecycleOwner(), observeNameChange);
+
+        Observer<String> observePhoneChange = new Observer<String>() {
+            @Override
+            public void onChanged(String t) {
+                dialog_name="phone";
+             ((TextView)view_.findViewById(R.id.phone_frame)).setText(t);
+             saveDataStrings();
+            }
+        };
+        MutableLiveData<String> phoneL = myViewModel.getPhoneLiveData();
+        phoneL.observe(getViewLifecycleOwner(), observePhoneChange);
+
 
         //------------------------ LOAD SAVE DATA ------------------------------------
         loadData();
         updateData();
-
         }
 
     private void saveDataStrings() {
@@ -136,6 +139,10 @@ public class ProfileFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.remove("ignore");
         editor.apply();
+    }
+
+    public static String getDialogClickedName(){
+        return dialog_name;
     }
 
 }

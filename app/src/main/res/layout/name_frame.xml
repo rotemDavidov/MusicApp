@@ -77,7 +77,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:paddingStart="40dp"
-                        android:text="Israel Israeli"
                         android:textAlignment="textStart"
                         android:textColor="@color/black"
                         android:textSize="17sp"

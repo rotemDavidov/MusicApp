@@ -50,7 +50,7 @@
         android:layout_centerHorizontal="true"
         android:elevation="15dp"
         android:padding="5dp"
-        android:src="@drawable/rotem"
+        android:src="@drawable/img2"
         app:shapeAppearanceOverlay="@style/Circular" />
 
 
