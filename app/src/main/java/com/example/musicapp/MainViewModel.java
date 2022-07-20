@@ -35,7 +35,8 @@ public class MainViewModel extends AndroidViewModel {
     public Context context;
 
     //this values have the charters of live data
-    private MutableLiveData<String> inputLiveData;
+    private MutableLiveData<String> nameLiveData;
+    private MutableLiveData<String> phoneLiveData;
     private MutableLiveData<ArrayList<Song>> allSongs = null;
     private ArrayList<String> ignoredSongs;
 
@@ -49,7 +50,8 @@ public class MainViewModel extends AndroidViewModel {
 
     public void initlaizeValues(){
         // in this phase we have not said who is the observable data we just set an object of type live data
-        inputLiveData = new MutableLiveData<>();
+        phoneLiveData = new MutableLiveData<>();
+        nameLiveData = new MutableLiveData<>();
         ignoredSongs = this.readFromFile("sp");
 
     }
@@ -63,10 +65,15 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     //getters and setters
-    public MutableLiveData<String> getInputLiveData() {
-        return inputLiveData;
+    public MutableLiveData<String> getNameLiveData() {
+        return nameLiveData;
     }
-    public void setInputLiveData(String val){ inputLiveData.setValue(val);}
+    public void setNameLiveData(String val){ nameLiveData.setValue(val);}
+
+    public MutableLiveData<String> getPhoneLiveData() {
+        return phoneLiveData;
+    }
+    public void setPhoneLiveData(String val){ phoneLiveData.setValue(val);}
 
     public MutableLiveData<ArrayList<Song>> getAllSongs(){
         ArrayList<Song> listOfSongs;

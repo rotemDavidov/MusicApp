@@ -34,9 +34,13 @@ public class DialogClass extends DialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String name = ((EditText)Viewdialog.findViewById(R.id.input)).getText().toString();
-                                //there is a instance because the profile create one of this
-                                MainViewModel.getInstance(getActivity().getApplication()).setInputLiveData(name);
+                                String dialogName = ProfileFragment.getDialogClickedName();
+                                String input = ((EditText) Viewdialog.findViewById(R.id.input)).getText().toString();
+                                if (dialogName.equals("name"))
+                                    //there is a instance because the profile create one of this
+                                    MainViewModel.getInstance(getActivity().getApplication()).setNameLiveData(input);
+                                else
+                                    MainViewModel.getInstance(getActivity().getApplication()).setPhoneLiveData(input);
                             }
                         })
                 .setNegativeButton("Cancel",

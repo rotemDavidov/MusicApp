@@ -135,7 +135,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         // removing the song from the list of all songs
         mainViewModel.getAllSongs().getValue().remove(position);
         // notify that the live data has been changed
-        notifyItemRemoved(position);
+//        notifyItemRemoved(position);
+        notifyDataSetChanged();
     }
 
     public void onItemClick(int position) {

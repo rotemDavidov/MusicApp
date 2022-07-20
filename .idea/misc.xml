@@ -3,23 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/heart.xml" value="0.143" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.143" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.143" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/activity_main.xml" value="0.2078125" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/delete_favorite.xml" value="0.1" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/delete_music.xml" value="0.234375" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/dialog_name.xml" value="0.1" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/fave_rv.xml" value="0.1" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/fragment_favorites.xml" value="0.1" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/fragment_profile.xml" value="0.14492753623188406" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/fragment_search.xml" value="0.22456140350877193" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/fragment_song.xml" value="0.25" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/item_image.xml" value="0.25" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/name_frame.xml" value="0.1" />
+        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/name_frame.xml" value="0.264" />
         <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/phone_frame.xml" value="0.264" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/layout/row_item.xml" value="0.2" />
-        <entry key="..\:/Users/Rotem Davidov/AndroidStudioProjects/MusicApp/app/src/main/res/xml/setting_prefernce.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/matti/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/pause.xml" value="0.188" />
         <entry key="..\:/Users/matti/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/pause_btn.xml" value="0.1645" />
         <entry key="..\:/Users/matti/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/play_arrow.xml" value="0.188" />
@@ -36,14 +21,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.2" />
-      </ProjectState>
-    </option>
   </component>
 </project>
