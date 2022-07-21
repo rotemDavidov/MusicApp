@@ -106,6 +106,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                     onItemClick(position);
                 }
             });
+
+            //setting Favorits LISTNER
             favorit = (ImageView) itemView.findViewById(R.id.favorite_image);
             favorit.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view) {
