@@ -7,8 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.service.notification.NotificationListenerService;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,profileFragment).commit();
 
+        //Here we define what each button press result of the menu will do
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -64,6 +67,19 @@ public class MainActivity extends AppCompatActivity {
         }
         //ask for permission from the user , launch the dialog
         requestPermissionLauncher.launch(permission);
+    }
+
+    //Here we start the service, notifying the users that they have been away for a while
+    @Override
+    protected void onStop () {
+        startService(new Intent(this, NotificationService.class));
+        super.onStop();
+    }
+    //Here we stop the service, notifying the users that they have been away for a while
+    @Override
+    protected void onResume() {
+        stopService(new Intent(this, NotificationService.class));
+        super.onResume();
     }
 
     // Register the permissions callback, which handles the user's response to the
