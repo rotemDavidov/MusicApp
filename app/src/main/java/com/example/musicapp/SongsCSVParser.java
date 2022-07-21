@@ -48,6 +48,7 @@ public class SongsCSVParser {
         return songs;
     }
 
+    //Read all songs from CSV and create an arraylist from them
     public static ArrayList<Song> parseSongs(Context context) {
         List<String[]> songsFromFile = new ArrayList<>();
         try {

@@ -41,6 +41,7 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Button allSongsBtn = (Button) getView().findViewById(R.id.all_songs_btn);
         Button searchSongsBtn = (Button) getView().findViewById(R.id.search_songs_btn);
+        //Setting the onClick listeners for all songs button and search button
         allSongsBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 filterSongs(v);
@@ -59,7 +60,8 @@ public class SearchFragment extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
-
+            //When searching for songs, we clear shownSongsList and then search for a song
+            //containing the new text in allSongsList. Finally we set the recyclerview
             @Override
             public boolean onQueryTextChange(String newText) {
                 shownSongsList.clear();
@@ -71,7 +73,8 @@ public class SearchFragment extends Fragment {
                 }
                 adapter.shownSongs = shownSongsList;
                 rvSongs.setAdapter(adapter);
-                rvSongs.setLayoutManager(new LinearLayoutManager(getActivity()));
+                adapter.notifyDataSetChanged();
+                //rvSongs.setLayoutManager(new LinearLayoutManager(getActivity()));
                 return false;
             }
         });
@@ -81,20 +84,13 @@ public class SearchFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-/*        if(context instanceof SearchAdapter.SearchAdapterListener) {
-            listener = (SearchAdapter.SearchAdapterListener)context;
-        } else {
-            throw new RuntimeException(context.toString() +
-                    "must implement SearchAdapterListener");
-        }*/
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        //listener = null;
     }
-
+    //When resuming, we show all songs in list
     @Override
     public void onResume() {
         enableSearchView(getView().findViewById(R.id.searchView),false);
@@ -103,7 +99,7 @@ public class SearchFragment extends Fragment {
         adapter.notifyDataSetChanged();
         super.onResume();
     }
-
+    //When entering the search screen, all songs will be displayed
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -115,19 +111,21 @@ public class SearchFragment extends Fragment {
 
         //}
     }
-
+    //This function makes the changes required between searching for songs and showing all songs
     public void filterSongs(View v) {
         Button button = (Button)v;
         SearchView searchView = (SearchView) getView().findViewById(R.id.searchView);
         searchView.setQuery("", false);
         searchView.clearFocus();
         searchView.setQueryHint("Enter song name");
+        //Show all songs and disable searchview
         if(button.getText().toString().equals("All")){
             enableSearchView(getView().findViewById(R.id.searchView),false);
             adapter.shownSongs = allSongsList;
             rvSongs.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }
+        //Make searchview available and clear recyclerview
         else
         {
             enableSearchView(getView().findViewById(R.id.searchView),true);
@@ -136,7 +134,7 @@ public class SearchFragment extends Fragment {
             adapter.notifyDataSetChanged();
         }
     }
-
+    //This function enables/disables searchview
     private void enableSearchView(View view, boolean enabled) {
         view.setEnabled(enabled);
         if (view instanceof ViewGroup) {
