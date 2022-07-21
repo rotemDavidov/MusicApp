@@ -68,6 +68,7 @@ public class MainViewModel extends AndroidViewModel {
     public MutableLiveData<String> getNameLiveData() {
         return nameLiveData;
     }
+
     public void setNameLiveData(String val){ nameLiveData.setValue(val);}
 
     public MutableLiveData<String> getPhoneLiveData() {

@@ -19,24 +19,21 @@ public class NotificationService extends Service {
     TimerTask timerTask ;
     String TAG = "Timers" ;
     int Your_X_SECS = 10 ;
+    int DELAY = 10;
     @Override
     public IBinder onBind (Intent arg0) {
         return null;
     }
     @Override
     public int onStartCommand (Intent intent , int flags , int startId) {
-        Log.e( TAG , "onStartCommand" ) ;
         super.onStartCommand(intent , flags , startId) ;
         startTimer() ;
         return START_STICKY ;
     }
-    @Override
-    public void onCreate () {
-        Log.e( TAG , "onCreate" ) ;
-    }
+
+    //on resume call to this method
     @Override
     public void onDestroy () {
-        Log.e( TAG , "onDestroy" ) ;
         stopTimerTask() ;
         super.onDestroy() ;
     }
@@ -45,7 +42,8 @@ public class NotificationService extends Service {
     public void startTimer () {
         timer = new Timer() ;
         initializeTimerTask() ;
-        timer .schedule( timerTask , 5000 , Your_X_SECS * 1000 ) ; //
+        //change the time here
+        timer .schedule( timerTask , DELAY*1000 , Your_X_SECS * 1000 ) ; //
     }
     public void stopTimerTask () {
         if ( timer != null ) {
@@ -69,17 +67,13 @@ public class NotificationService extends Service {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext() , default_notification_channel_id ) ;
         mBuilder.setContentTitle( "Come Back!" ) ;
         mBuilder.setContentText( "It's been a while. We've missed you :-)" ) ;
-        mBuilder.setTicker( "Notification Listener Service Example" ) ;
         mBuilder.setSmallIcon(R.drawable. ic_launcher_foreground ) ;
-        mBuilder.setAutoCancel( true ) ;
         if (android.os.Build.VERSION. SDK_INT >= android.os.Build.VERSION_CODES. O ) {
             int importance = NotificationManager. IMPORTANCE_HIGH ;
             NotificationChannel notificationChannel = new NotificationChannel( NOTIFICATION_CHANNEL_ID , "NOTIFICATION_CHANNEL_NAME" , importance) ;
             mBuilder.setChannelId( NOTIFICATION_CHANNEL_ID ) ;
-            assert mNotificationManager != null;
             mNotificationManager.createNotificationChannel(notificationChannel) ;
         }
-        assert mNotificationManager != null;
         mNotificationManager.notify(( int ) System. currentTimeMillis () , mBuilder.build()) ;
     }
 }

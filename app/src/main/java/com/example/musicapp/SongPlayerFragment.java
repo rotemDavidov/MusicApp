@@ -139,9 +139,6 @@ public class SongPlayerFragment extends Fragment {
             @Override
             public void run() {
                 songDuration = mp.getDuration();
-                int seconds = 0;
-                int minutes = 0;
-                String stringToSend = new String();
                 while(mp != null) {
                     try{
                         if(mp.isPlaying()){

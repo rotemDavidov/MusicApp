@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //static permission , this is why the window pop in the start of the program
         permission(Manifest.permission.READ_SMS);
         permission(Manifest.permission.RECEIVE_SMS);
     }

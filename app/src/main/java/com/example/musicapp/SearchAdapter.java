@@ -143,15 +143,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     public void onItemClick(int position) {
         Song song = this.shownSongs.get(position);
-/*        if(mp != null)
-            mp.stop();
-        mp = MediaPlayer.create(this.context,
-                this.context.getResources().getIdentifier(song.track, "raw", this.context.getPackageName()));
-        mp.start();*/
         Bundle b = new Bundle();
-        //b.putInt("SongPosition", position);
         b.putSerializable("song", song);
-        //b.putParcelable("SongsList", (Parcelable) shownSongs);
         songPlayerFragment.setArguments(b);
         ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, songPlayerFragment)
