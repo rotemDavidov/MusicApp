@@ -75,7 +75,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         }
 
         public void bindData(final int position) {
-            //------------- bind the hearts according to thayer existing in the raw file------------
+            //-------------- bind the hearts according to thayer existing in the raw file------------
             String song_name = mainViewModel.getAllSongs().getValue().get(position).name;
             // if the name is in the file then we marked it as favorite and we need to bind the full heart
             // we have to do this check because the constructor in song class put false as default
